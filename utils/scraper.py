@@ -1,9 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
-from Revista import Revista
-from csv_utils import write_csv, revista_in_csv
+from .Revista import Revista
+from .csv_utils import write_csv, revista_in_csv, urls_in_csv
 
-visited_urls = []
+visited_urls = urls_in_csv()
 
 
 def paginate_and_write_to_csv() -> None:
@@ -13,7 +13,6 @@ def paginate_and_write_to_csv() -> None:
     url = "https://www.scimagojr.com/journalrank.php"
     while url:
         if url not in visited_urls:
-            visited_urls.append(url)
             write_to_journal_csv(url)
             page = requests.get(url)
             pages.append(page)
@@ -43,7 +42,6 @@ def get_journal_info(url: str) -> dict:
     """
     global visited_urls
     if url not in visited_urls:
-        visited_urls.append(url)
         page = requests.get(url)
         soup = BeautifulSoup(page.text, "html.parser")
         grid = soup.find(class_="journalgrid")
@@ -123,7 +121,6 @@ def write_to_journal_csv(page_url: str) -> None:
             )
             if not revista_in_csv(revista.id):
                 write_csv(revista)
-            visited_urls.append(url)
 
 
 if __name__ == "__main__":

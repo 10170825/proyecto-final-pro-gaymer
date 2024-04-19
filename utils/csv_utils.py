@@ -1,6 +1,6 @@
 import csv
 from os import path
-from Revista import Revista
+from .Revista import Revista
 
 
 def write_csv(revista: Revista) -> None:
@@ -57,6 +57,13 @@ def revista_in_csv(id: str) -> bool:
     if id in revistas:
         return True
     return False
+
+
+def urls_in_csv() -> list:
+    if not path.isfile("data/revistas.csv"):
+        return
+    urls = [revista["url"] for revista in read_csv()]
+    return urls
 
 
 if __name__ == "__main__":
