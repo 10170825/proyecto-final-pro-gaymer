@@ -7,6 +7,11 @@ from .Revista import Revista
 
 
 def write_csv(revista: Revista) -> None:
+    """Escribe la información de una revista en un archivo CSV, si no existe el archivo crea uno nuevo.
+
+    Args:
+        revista: Objeto revista
+    """
     csv_path = "data/revistas.csv"
     if not path.isfile(csv_path):
         with open(csv_path, "w", newline="", encoding="utf-8") as csv_file:
@@ -46,6 +51,11 @@ def write_csv(revista: Revista) -> None:
 
 
 def read_csv() -> list:
+    """Obtiene un diccionario de revistas con su información a partir del archivo CSV.
+
+    Returns:
+        dict: Diccionario con la información de cada revista
+    """
     archivo = "data/revistas.csv"
     lista = []
     with open(archivo, "r", encoding="utf-8") as archivo:
@@ -54,6 +64,14 @@ def read_csv() -> list:
 
 
 def revista_in_csv(id: str) -> bool:
+    """Revisa si una revista ya se escribio en el archivo csv a partir de su id.
+
+    Args:
+        id: Id de una revista (su títutlo sin espacios).
+
+    Returns:
+        bool: True si la revista está en el archivo csv y False si no está en el archivo csv.
+    """
     if not path.isfile("data/revistas.csv"):
         return False
     revistas = [revista["id"] for revista in read_csv()]
@@ -63,6 +81,11 @@ def revista_in_csv(id: str) -> bool:
 
 
 def urls_in_csv() -> list:
+    """Obtiene una lista de urls de revistas ya escritas en el archivo CSV.
+
+    Returns:
+        list: Lista con las urls de las revistas que ya se han agregado al CSV.
+    """
     if not path.isfile("data/revistas.csv"):
         return
     urls = [revista["url"] for revista in read_csv()]
