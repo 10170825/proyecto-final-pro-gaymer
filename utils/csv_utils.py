@@ -1,3 +1,6 @@
+"""Métodos para escribir y leer archivos CSV
+"""
+
 import csv
 from os import path
 from .Revista import Revista

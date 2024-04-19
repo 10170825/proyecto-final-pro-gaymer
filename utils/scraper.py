@@ -1,3 +1,6 @@
+"""Métodos para obtener información de las revistas en la página https://www.scimagojr.com
+"""
+
 import requests
 from bs4 import BeautifulSoup
 from .Revista import Revista
@@ -75,7 +78,11 @@ def get_journal_info(url: str) -> dict:
 
 
 def write_to_journal_csv(page_url: str) -> None:
-    """Crea un objeto Revista y escribe su información en el archivo CSV."""
+    """Crea un objeto Revista y escribe su información en el archivo CSV.
+
+    Args:
+        page_url: Enlace de la página de donde se sacarán las revistas.
+    """
     page = requests.get(page_url)
     global visited_urls
     soup = BeautifulSoup(page.content, "html.parser")
