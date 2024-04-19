@@ -1,5 +1,5 @@
 class Revista:
-    '''Clase para representar una revista académica y almacenar su información asociada.
+    """Clase para representar una revista académica y almacenar su información asociada.
 
     Attributes:
         id: Una cadena que representa la revista.
@@ -11,14 +11,24 @@ class Revista:
         url: Enlace a la pagina de la revista en https://www.scimagojr.com.
         subjects: Lista de diccionarios que contienen el área y categoría de la revista.
         publisher: La editorial que publico la revista.
-        issn: Lista de numero(s) ISSN de la revista.
+        issn: Numero(s) ISSN de la revista.
         widget: Código html para insertar un widget con información de la revista.
-    '''
-    def __init__(self,titulo:str, catalogo:str, sjr:str,
-                 q:str, total_citas:str, url:str, 
-                 subjects:list[dict[str, str]], publisher:str, issn:list[str], widget:str):
-        '''Constructor para la clase Revista
-        '''
+    """
+
+    def __init__(
+        self,
+        titulo: str,
+        catalogo: str,
+        sjr: str,
+        q: str,
+        total_citas: str,
+        url: str,
+        subjects: list[dict],
+        publisher: str,
+        issn: str,
+        widget: str,
+    ):
+        """Constructor para la clase Revista"""
         self.id = titulo.replace(" ", "")
         self.titulo = titulo
         self.catalogo = catalogo
@@ -31,10 +41,10 @@ class Revista:
         self.issn = issn
         self.widget = widget
 
-    def __str__(self) -> str:
-        '''Representación en forma de cadena de la instancia de Revista.
+    def __str__(self):
+        """Representación en forma de cadena de la instancia de Revista
 
         Returns:
-            str: Cadena que representa la instancia de Revista en formato CSV.
-        '''
-        return f'{self.id},{self.titulo},{self.catalogo},{self.sjr},{self.q},{self.total_citas},{self.url},{self.subjects},{self.publisher},{self.issn},{self.widget}'
+            str: Cadena con el titulo, catalogo, sjr, cuartil y total de citas de la revista
+        """
+        return f"{self.titulo}|{self.catalogo}|{self.sjr}|{self.q}|{self.total_citas}"
