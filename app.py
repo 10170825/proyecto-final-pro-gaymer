@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from utils import get_word_journals_dict, get_abc_words_dict
+from utils import get_word_journals_dict, get_abc_words_dict, get_id_journal_dict
 
 app = Flask(__name__)
 
@@ -25,21 +25,22 @@ def busqueda(busqueda):
 @app.route("/explorar")
 def explorar():
     diccionario_palabras = get_abc_words_dict()
-    palabras_letra = [(letra, palabras) for letra, palabras in diccionario_palabras.items()]
-    return render_template("explorar.html", palabras_letra=palabras_letra)
+    letras = diccionario_palabras.keys()  # Obtener todas las letras del abecedario
+    return render_template("explorar.html", letras=letras)
 
 
 @app.route("/explorar/<letra>")
-def palabras(letra: str):
+def palabras_por_letra(letra: str):
     diccionario_palabras = get_abc_words_dict()
-    palabras_letra = [(letra, palabras) for letra, palabras in diccionario_palabras.items() if letra == letra.upper()]
-    return render_template("explorar.html", palabras_letra=palabras_letra)
+    palabras_letra = diccionario_palabras.get(letra.upper(), [])
+    letras = list(diccionario_palabras.keys())  # Obtener la lista completa de letras
+    return render_template("explorar.html", letra=letra, palabras_letra=palabras_letra, letras=letras)
 
-@app.route("/explorar/<palabra>")
+@app.route("/explorar/palabra/<palabra>")
 def revistas_por_palabra(palabra: str):
-    diccionario_revistas = get_word_journals_dict(diccionario_letras, palabra[0].upper())
-    return render_template("revistas.html", palabra=palabra, revistas=diccionario_revistas.get(palabra.upper(), []))
-
+    dict_revistas = get_id_journal_dict()
+    revistas = [revista for revista in dict_revistas.values() if palabra.upper() in revista["titulo"].upper()]
+    return render_template("revistas_por_palabra.html", palabra=palabra, revistas=revistas)
 
 @app.route("/<id>")
 def revista(id: str):

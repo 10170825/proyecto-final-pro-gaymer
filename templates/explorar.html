@@ -1,32 +1,34 @@
 {% extends "base.html" %}
-{% block title %}Explorar Revistas - Revistas Educativas{% endblock %}
+{% block title %}Explorar - Revistas Pro-Gaymer{% endblock %}
 
 {% block body %}
 <main>
-    <section>
-        <h2>Explorar Revistas</h2>
-        <div class="row">
-            <div class="col-12">
-                <ul class="nav nav-tabs" id="letrasTab" role="tablist">
-                    {% for letra, palabras in palabras_letra %}
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link {% if letra == 'A' %}active{% endif %}" id="letra-{{ letra }}-tab" data-bs-toggle="tab" href="#letra-{{ letra }}" role="tab" aria-controls="letra-{{ letra }}" aria-selected="{% if letra == 'A' %}true{% else %}false{% endif %}">{{ letra }}</a>
+    <section class="py-5">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3">
+                    <h2>Abecedario</h2>
+                    <ul class="list-group">
+                        {% for letra in letras %}
+                        <li class="list-group-item">
+                            <a href="/explorar/{{ letra }}">{{ letra }}</a>
                         </li>
-                    {% endfor %}
-                </ul>
-                <div class="tab-content" id="letrasTabContent">
-                    {% for letra, palabras in palabras_letra %}
-                        <div class="tab-pane fade {% if letra == 'A' %}show active{% endif %}" id="letra-{{ letra }}" role="tabpanel" aria-labelledby="letra-{{ letra }}-tab">
-                            <ul>
-                                {% for palabra in palabras %}
-                                    <li><a href="/explorar/{{ palabra }}">{{ palabra }}</a></li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-9">
+                    {% if letra %}
+                    <h2>Palabras que Comienzan con la Letra {{ letra }}</h2>
+                    <ul class="list-group">
+                        {% for palabra in palabras_letra %}
+                        <li class="list-group-item"><a href="/explorar/palabra/{{ palabra }}">{{ palabra }}</a></li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </section>
 </main>
 {% endblock %}
+
