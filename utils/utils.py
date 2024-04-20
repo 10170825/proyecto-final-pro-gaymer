@@ -30,7 +30,7 @@ def get_abc_words_dict() -> dict:
     return dict_palabras
 
 
-def get_word_journals_dict(dict_palabras: dict, letra: chr) -> dict:
+def get_word_journals_dict(dict_palabras: dict, letra: str) -> dict:
     """Obtiene un diccionario de palabras y las revistas que contienen la palabra en su título.
 
     Args:
@@ -52,6 +52,17 @@ def get_word_journals_dict(dict_palabras: dict, letra: chr) -> dict:
                     diccionario_revistas[palabra].append(revista)
     diccionario_revistas = {k: v for k, v in sorted(diccionario_revistas.items())}
     return diccionario_revistas
+
+
+def get_id_journal_dict() -> dict:
+    """Obtiene un diccionario de revistas con sus ids.
+
+    Returns:
+        dict: Diccionario con los ids de las revistas como clave y la revista como valor.
+    """
+    revistas = read_csv()
+    dict_ids = {revista["id"]: revista for revista in revistas}
+    return dict_ids
 
 
 if __name__ == "__main__":
