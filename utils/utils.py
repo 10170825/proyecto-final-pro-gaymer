@@ -44,15 +44,11 @@ def get_word_journals_dict(dict_palabras: dict, letra: str) -> dict:
     palabras = dict_palabras[letra.upper()]
     diccionario_revistas = {}
     for palabra in palabras:
+        diccionario_revistas[palabra] = []  
         for revista in revistas:
             if palabra in revista["titulo"].upper():
-                if palabra not in diccionario_revistas:
-                    diccionario_revistas[palabra] = [revista]
-                else:
-                    diccionario_revistas[palabra].append(revista)
-    diccionario_revistas = {k: v for k, v in sorted(diccionario_revistas.items())}
+                diccionario_revistas[palabra].append(revista)
     return diccionario_revistas
-
 
 def get_id_journal_dict() -> dict:
     """Obtiene un diccionario de revistas con sus ids.
@@ -63,7 +59,6 @@ def get_id_journal_dict() -> dict:
     revistas = read_csv()
     dict_ids = {revista["id"]: revista for revista in revistas}
     return dict_ids
-
 
 if __name__ == "__main__":
     dic = get_abc_words_dict()
