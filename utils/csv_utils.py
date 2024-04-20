@@ -13,6 +13,7 @@ def write_csv(revista: Revista) -> None:
         revista: Objeto revista
     """
     csv_path = "data/revistas.csv"
+    csv_path = path.join(path.dirname(__file__), csv_path)
     if not path.isfile(csv_path):
         with open(csv_path, "w", newline="", encoding="utf-8") as csv_file:
             writer = csv.writer(csv_file, quoting=csv.QUOTE_MINIMAL)
@@ -56,9 +57,10 @@ def read_csv() -> list:
     Returns:
         dict: Diccionario con la información de cada revista
     """
-    archivo = "data/revistas.csv"
+    csv_path = "data/revistas.csv"
+    csv_path = path.join(path.dirname(__file__), csv_path)
     lista = []
-    with open(archivo, "r", encoding="utf-8") as archivo:
+    with open(csv_path, "r", encoding="utf-8") as archivo:
         lista = list(csv.DictReader(archivo))
     return lista
 
@@ -72,7 +74,9 @@ def revista_in_csv(id: str) -> bool:
     Returns:
         bool: True si la revista está en el archivo csv y False si no está en el archivo csv.
     """
-    if not path.isfile("data/revistas.csv"):
+    csv_path = "data/revistas.csv"
+    csv_path = path.join(path.dirname(__file__), csv_path)
+    if not path.isfile(csv_path):
         return False
     revistas = [revista["id"] for revista in read_csv()]
     if id in revistas:
@@ -86,7 +90,9 @@ def urls_in_csv() -> list:
     Returns:
         list: Lista con las urls de las revistas que ya se han agregado al CSV.
     """
-    if not path.isfile("data/revistas.csv"):
+    csv_path = "data/revistas.csv"
+    csv_path = path.join(path.dirname(__file__), csv_path)
+    if not path.isfile(csv_path):
         return
     urls = [revista["url"] for revista in read_csv()]
     return urls
