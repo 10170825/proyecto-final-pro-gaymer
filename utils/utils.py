@@ -80,6 +80,23 @@ def find_journals(palabras: list) -> dict:
     return resultado
 
 
+def buscar_revistas_por_palabra(palabra: str):
+    """Busca las revistas que contienen la palabra en su título.
+
+    Args:
+        palabra (str): Palabra clave para la búsqueda.
+
+    Returns:
+        list: Lista de revistas que contienen la palabra en su título.
+    """
+    revistas = read_csv()
+    revistas_encontradas = []
+    for revista in revistas:
+        if palabra.upper() in revista["titulo"].upper():
+            revistas_encontradas.append(revista)
+    return revistas_encontradas
+
+
 if __name__ == "__main__":
     dic = get_abc_words_dict()
     for letra, palabas in dic.items():
