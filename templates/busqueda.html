@@ -1,39 +1,38 @@
 <!-- busqueda.html -->
 
-{% extends "base.html" %}
-{% block title %}Búsqueda - Revistas Pro-Gaymer{% endblock %}
-
-{% block body %}
+{% extends "base.html" %} {% block title %}Búsqueda - Revistas Pro-Gaymer{%
+endblock %} {% block body %}
 <main>
-    <section class="py-5">
-        <div class="container-fluid">
-            <h2>Resultado de búsqueda para: "{{ palabra_clave }}"</h2>
-            <div class="row">
-                <div class="col-12">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Título</th>
-                                <th>Catálogo</th>
-                                <th>Factor de Impacto SJR</th>
-                                <!-- Añade más encabezados según sea necesario -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for revista in revistas %}
-                            <tr>
-                                <td><a href="/revista/{{ revista.id }}">{{ revista.titulo }}</a></td>
-                                <td>{{ revista.catalogo }}</td>
-                                <td>{{ revista.sjr }}</td>
-                                <!-- Añade más columnas según sea necesario -->
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+  <section class="py-5">
+    <div class="container-fluid">
+      <h2>Resultado de búsqueda para: "{{ busqueda }}"</h2>
+      <div class="row">
+        <div class="col-12">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Catálogo</th>
+                <th>Factor de Impacto SJR</th>
+                <!-- Añade más encabezados según sea necesario -->
+              </tr>
+            </thead>
+            <tbody>
+              {% for revista in revistas %}
+              <tr>
+                <td>
+                  <a href="/revista/{{ revista.id }}">{{ revista.titulo }}</a>
+                </td>
+                <td>{{ revista.catalogo }}</td>
+                <td>{{ revista.sjr }}</td>
+                <!-- Añade más columnas según sea necesario -->
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 </main>
 {% endblock %}
-
