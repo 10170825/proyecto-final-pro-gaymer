@@ -24,7 +24,7 @@ def write_csv(revista: Revista) -> None:
                     "catalogo",
                     "sjr",
                     "q",
-                    "total citas",
+                    "total_citas",
                     "url",
                     "subjects",
                     "publisher",
