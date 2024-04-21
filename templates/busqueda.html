@@ -1,16 +1,13 @@
+<!-- busqueda.html -->
+
 {% extends "base.html" %}
-{% block title %}Revistas por Palabra - Revistas Pro-Gaymer{% endblock %}
+{% block title %}Búsqueda - Revistas Pro-Gaymer{% endblock %}
 
 {% block body %}
 <main>
     <section class="py-5">
         <div class="container-fluid">
-            <h2>Revistas que contienen la palabra: "{{ palabra }}"</h2>
-            <div class="row">
-                <div class="col-12">
-                    <a href="/explorar" class="btn btn-primary mb-3">Volver al Abecedario</a>
-                </div>
-            </div>
+            <h2>Resultado de búsqueda para: "{{ palabra_clave }}"</h2>
             <div class="row">
                 <div class="col-12">
                     <table class="table">
@@ -19,14 +16,16 @@
                                 <th>Título</th>
                                 <th>Catálogo</th>
                                 <th>Factor de Impacto SJR</th>
+                                <!-- Añade más encabezados según sea necesario -->
                             </tr>
                         </thead>
                         <tbody>
                             {% for revista in revistas %}
                             <tr>
-                                <td>{{ revista.titulo }}</td>
+                                <td><a href="/revista/{{ revista.id }}">{{ revista.titulo }}</a></td>
                                 <td>{{ revista.catalogo }}</td>
                                 <td>{{ revista.sjr }}</td>
+                                <!-- Añade más columnas según sea necesario -->
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -37,3 +36,4 @@
     </section>
 </main>
 {% endblock %}
+

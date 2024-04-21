@@ -30,8 +30,8 @@
                         <a class="nav-link" href="/creditos">Créditos</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar">
+                <form class="d-flex" method="POST" action="/busqueda">
+                    <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Buscar" name="palabra_clave">
                     <button class="btn btn-outline-light" type="submit">Buscar</button>
                 </form>
                 <img src="{{ url_for('static', filename='uni.svg') }}" alt="Logo Unison" width="45" height="45" class="d-inline-block align-text-top ms-3 mr-2">

@@ -1,5 +1,5 @@
-from flask import Flask, render_template
-from utils import get_word_journals_dict, get_abc_words_dict, get_id_journal_dict
+from flask import Flask, render_template, request
+from utils import get_word_journals_dict, get_abc_words_dict, get_id_journal_dict, buscar_revistas_por_palabra
 
 app = Flask(__name__)
 
@@ -16,9 +16,13 @@ def creditos():
     return render_template("creditos.html")
 
 
-@app.route("/busqueda/<busqueda>")
-def busqueda(busqueda):
-    """todavia nose qe hacer con esta"""
+@app.route("/busqueda", methods=["GET", "POST"])
+def busqueda():
+    if request.method == "POST":
+        palabra_clave = request.form.get("palabra_clave")
+        if palabra_clave:
+            revistas = buscar_revistas_por_palabra(palabra_clave)
+            return render_template("busqueda.html", palabra_clave=palabra_clave, revistas=revistas)
     return render_template("busqueda.html")
 
 
@@ -42,9 +46,12 @@ def revistas_por_palabra(palabra: str):
     revistas = [revista for revista in dict_revistas.values() if palabra.upper() in revista["titulo"].upper()]
     return render_template("revistas_por_palabra.html", palabra=palabra, revistas=revistas)
 
-@app.route("/<id>")
-def revista(id: str):
-    return render_template("revista.html")
+@app.route("/revista/<id>")
+def revista_detalle(id: str):
+    dict_revistas = get_id_journal_dict()
+    revista = dict_revistas.get(id)
+    return render_template("revista_detalle.html", revista=revista)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
