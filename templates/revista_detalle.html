@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block title %} Detalles de la Revista - Revistas Pro {% endblock %}
+
+{% block body %}
+<main>
+    <section class="py-5">
+        <div class="container">
+            <h2 class="mb-4"><a href="{{ revista.url }}" target="_blank">{{ revista.titulo }}</a></h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Editorial</h5>
+                            <p class="card-text">{{ revista.publisher }}</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">ISSN</h5>
+                            <p class="card-text">{{ revista.issn }}</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Catálogo</h5>
+                            <p class="card-text">{{ revista.catalogo }}</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Subject Area and category</h5>
+                            <ul class="list-unstyled">
+                                {% for subject_item in revista.subjects %}
+                                    <li>
+                                        {% for key, value in subject_item.items() %}
+                                            <strong>{{ key }}:</strong> {{ value }}<br>
+                                        {% endfor %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Factor de Impacto SJR</h5>
+                            <p class="card-text">{{ revista.sjr }}</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Cuartil</h5>
+                            <p class="card-text">{{ revista.q }}</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Total de citas</h5>
+                            <p class="card-text">{{ revista.total_citas }}</p>
+                        </div>
+                    </div>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Widget</h5>
+                            {{ revista.widget | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
