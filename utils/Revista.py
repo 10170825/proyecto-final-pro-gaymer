@@ -1,5 +1,6 @@
 import json
 
+
 class Revista:
     """Clase para representar una revista académica y almacenar su información asociada.
 
@@ -38,19 +39,16 @@ class Revista:
         self.q = q
         self.total_citas = int(total_citas)
         self.url = url
-        self.subjects_json = subjects
+        self.subjects = subjects
         self.publisher = publisher
         self.issn = issn
         self.widget = widget
 
-def subjects_list(self):
-        subjects_json = self.subjects_json.replace("'", '"')  
-        return json.loads(subjects_json)
 
 def __str__(self):
-        """Representación en forma de cadena de la instancia de Revista
+    """Representación en forma de cadena de la instancia de Revista
 
-        Returns:
-            str: Cadena con el titulo, catalogo, sjr, cuartil y total de citas de la revista
-        """
-        return f"{self.titulo}|{self.catalogo}|{self.sjr}|{self.q}|{self.total_citas}"
+    Returns:
+        str: Cadena con el titulo, catalogo, sjr, cuartil y total de citas de la revista
+    """
+    return f"{self.titulo}|{self.catalogo}|{self.sjr}|{self.q}|{self.total_citas}"
