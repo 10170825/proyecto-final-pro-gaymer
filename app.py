@@ -5,7 +5,7 @@ from utils import (
     get_id_journal_dict,
     find_journals,
 )
-import json
+from ast import literal_eval
 
 app = Flask(__name__)
 
@@ -64,9 +64,10 @@ def revistas_por_palabra(palabra: str):
 def revista_detalle(id: str):
     dict_revistas = get_id_journal_dict()
     revista = dict_revistas.get(id)
-    if revista and 'subjects' in revista:
-        subjects_list = json.loads(revista['subjects'].replace("'", '"'))  
-        revista['subjects'] = subjects_list  
+    if revista and "subjects" in revista:
+        subjects_list = literal_eval(revista["subjects"])
+        revista["subjects"] = subjects_list
+    revista["issn"] = literal_eval(revista["issn"])
     return render_template("revista_detalle.html", revista=revista)
 
 
