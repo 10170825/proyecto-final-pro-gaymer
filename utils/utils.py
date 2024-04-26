@@ -20,12 +20,13 @@ def get_abc_words_dict() -> dict:
                 palabras.append(palabra)
     dict_palabras = {}
     for palabra in palabras:
-        letra = palabra[0].upper()
-        if letra.isalpha():
-            if letra not in dict_palabras:
-                dict_palabras[letra] = [palabra]
-            else:
-                dict_palabras[letra].append(palabra)
+        if palabra:
+            letra = palabra[0].upper()
+            if letra.isalpha():
+                if letra not in dict_palabras:
+                    dict_palabras[letra] = [palabra]
+                else:
+                    dict_palabras[letra].append(palabra)
     dict_palabras = {k: v for k, v in sorted(dict_palabras.items())}
     return dict_palabras
 
