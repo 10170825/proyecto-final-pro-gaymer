@@ -97,8 +97,11 @@ def write_to_journal_csv(page_url: str) -> None:
         if url not in visited_urls:
             title = title.text.strip()
             orde = row.find(class_="orde")
-            sjr = orde.text.strip()
-            sjr = sjr.partition(" ")[0]
+            if orde.text:
+                sjr = orde.text.strip()
+                sjr = sjr.partition(" ")[0]
+            else:
+                sjr = 0
             if orde.find("span"):
                 q = orde.find("span").text.strip()
             else:
